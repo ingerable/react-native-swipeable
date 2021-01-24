@@ -210,7 +210,7 @@ export default class Swipeable extends PureComponent {
   }], {useNativeDriver: false});
 
   _handleMoveShouldSetPanResponder = (event, gestureState) => {
-    let angle = Math.atan2(gestureState.vx, gestureState.vy)* 180 / Math.PI;
+    let angle = Math.abs(Math.atan2(gestureState.vx, gestureState.vy)* 180 / Math.PI);
     return Math.abs(gestureState.dx) > this.props.swipeStartMinDistance && (angle > 90 - this.props.swipeAngle && angle < 90 + this.props.swipeAngle)
   };
 
