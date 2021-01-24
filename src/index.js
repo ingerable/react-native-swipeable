@@ -74,6 +74,7 @@ export default class Swipeable extends PureComponent {
     onRef: PropTypes.func,
     onPanAnimatedValueRef: PropTypes.func,
     swipeStartMinDistance: PropTypes.number,
+    swipeAngle: PropTypes.number,
 
     // styles
     style: ViewPropTypes.style,
@@ -152,7 +153,8 @@ export default class Swipeable extends PureComponent {
     // misc
     onRef: noop,
     onPanAnimatedValueRef: noop,
-    swipeStartMinDistance: 15
+    swipeStartMinDistance: 15,
+    swipeAngle: 30,
   };
 
   state = {
@@ -207,9 +209,10 @@ export default class Swipeable extends PureComponent {
     dy: this.state.pan.y,
   }], {useNativeDriver: false});
 
-  _handleMoveShouldSetPanResponder = (event, gestureState) => (
-    Math.abs(gestureState.dx) > this.props.swipeStartMinDistance
-  );
+  _handleMoveShouldSetPanResponder = (event, gestureState) => {
+    let angle = Math.atan2(gestureState.vx, gestureState.vy)* 180 / Math.PI;
+    return Math.abs(gestureState.dx) > this.props.swipeStartMinDistance && (angle > 90 - this.props.swipeAngle && angle < 90 + this.props.swipeAngle)
+  };
 
   _handlePanResponderStart = (event, gestureState) => {
     const {lastOffset, pan} = this.state;

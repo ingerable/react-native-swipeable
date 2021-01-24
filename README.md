@@ -50,6 +50,7 @@ function MyListItem() {
 | `rightButtonWidth`              | integer      | 75      | (optional) resting visible peek of each right button after buttons are swiped open        |
 | `onRef`                         | function     | `null`  | (optional) receive swipeable component instance reference                                 |
 | `onPanAnimatedValueRef`         | function     | `null`  | (optional) receive swipeable pan `Animated.ValueXY` reference for upstream animations     |
+| `swipeAngle`                    | number       | 30      | (optional) swipe triggered if swipeAngle is between 90 + swipeAngle and 90 - swipeAngle (90 is being an horizontal standard swipe)   |
 
 ### Advanced Props
 
